@@ -3,12 +3,7 @@
 #include <thread>
 #include <chrono>
 #include <iostream>
-using namespace std::this_thread;
-using namespace std;
-using std::cout;
-using std::flush;
-using std::this_thread::sleep_for;
-using std::chrono::seconds;
+using std::cout, std::flush, std::this_thread::sleep_for, std::chrono::seconds;
 
 void displayMessage(std::string message) {
     cout << message << "\n";
@@ -36,12 +31,10 @@ int vitalsOk(float temperature, float pulseRate, float spo2) {
     if (isTemperatureCritical(temperature)) {
         displayMessage("Temperature is critical!");
         return 0;
-    }
-    else if (isPulseRateOutOfRange(pulseRate)) {
+    }else if (isPulseRateOutOfRange(pulseRate)) {
         displayMessage("Pulse Rate is out of range!");
         return 0;
-    }
-    else if (isSpo2OutOfRange(spo2)) {
+    }else if (isSpo2OutOfRange(spo2)) {
         displayMessage("Oxygen Saturation out of range!");
         return 0;
     }
