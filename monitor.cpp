@@ -16,7 +16,7 @@ void displayMessage(std::string message) {
 }
 
 bool isTemperatureCritical(float temperature) {
-    if(temperature > 102 || temperature < 95) {
+    if (temperature > 102 || temperature < 95) {
         displayMessage("Temperature is critical!");
     return 0;
     }
@@ -25,8 +25,8 @@ return 1;
 
 
 bool isPulseRateOutOfRange(float pulseRate) {
-    if(pulseRate < 60 || pulseRate > 100) {
-        displayMessage("Pulse Rate is out of range!"); 
+    if (pulseRate < 60 || pulseRate > 100) {
+        displayMessage("Pulse Rate is out of range!");
         return 0;
     }
     return 1;
@@ -40,7 +40,7 @@ bool isSpo2OutOfRange(float spo2) {
     return 1;
 }
 
-int vitalsOk(float temperature, float pulseRate, float spo2) {
-    return (isTemperatureCritical(temperature) && isPulseRateOutOfRange(pulseRate) && isSpo2OutOfRange(spo2));
+int vitalsOk(float temp, float pulse, float spo2) {
+    return (isTemperatureCritical(temp) && isPulseRateOutOfRange(pulse) && isSpo2OutOfRange(spo2));
 }
 
