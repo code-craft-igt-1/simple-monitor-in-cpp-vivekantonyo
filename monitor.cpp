@@ -6,13 +6,6 @@
 using std::cout, std::flush, std::this_thread::sleep_for, std::chrono::seconds;
 using namespace std;
 
-string valueIsWithinRange = "NORMAL";
-string upperLimitWarning = "TEMP_HYPER_WARNING";
-string lowerLimitWarning = "TEMP_HYPO_WARNING";
-string temperatureCritical = "TEMP_CRITICAL";
-string pulseRateCritical = "PULSERATE_CRITICAL";
-string spo2Critical = "SPO2_CRITICAL";
-
 void displayMessage(std::string message) {
     cout << message << "\n";
     for (int i = 0; i < 6; i++) {
@@ -33,46 +26,46 @@ void checkEarlyWarning(float currentvalue, float upperLimit, float lowerLimit) {
     float upperWarningLimit = upperLimit - (upperLimit * tolerance);
     float lowerWarningLimit = lowerLimit + (lowerLimit * tolerance);
     if (currentvalue > upperWarningLimit)
-        message = upperLimitWarning;
+        message = "TEMP_HYPER_WARNING";
     else if (currentvalue < lowerWarningLimit)
-        message = lowerLimitWarning;
+        message = "TEMP_HYPO_WARNING";
     else
-        message = valueIsWithinRange;
+        message = "NORMAL";
     displayMessage(message);
 }
 
-int checkTemperatureValue(float temperature) {
-    bool checkTemperatureNotInRange = isParamsNotInRange(temperature, TEMPERATURE_LOWER_LIMIT, TEMPERATURE_UPPER_LIMIT);
-    if (checkTemperatureNotInRange) {
+int checkTemperatureValue(float temp) {
+    bool checkTempRange = isParamsNotInRange(temp, TEMP_LOWERLIMIT, TEMP_UPPERLIMIT);
+    if (checkTempRange) {
         displayMessage("TEMP_CRITICAL");
         return 0;
     }
     else {
-        checkEarlyWarning(temperature, TEMPERATURE_UPPER_LIMIT, TEMPERATURE_LOWER_LIMIT);
+        checkEarlyWarning(temp, TEMP_UPPERLIMIT, TEMP_LOWERLIMIT);
         return 1;
     }
 }
 
-int checkPulseRateValue(float pulseRate) {
-    bool checkPulseRateNotInRange = isParamsNotInRange(pulseRate, PULSE_RATE_LOWER_LIMIT, PULSE_RATE_UPPER_LIMIT);
-    if (checkPulseRateNotInRange) {
-        displayMessage(pulseRateCritical);
+int checkPulseRateValue(float pulse) {
+    bool checkPulseRange = isParamsNotInRange(pulse, PULSE_LOWERLIMIT, PULSE_UPPERLIMIT);
+    if (checkPulseRange) {
+        displayMessage("PULSERATE_CRITICAL");
         return 0;
     }
     else {
-        checkEarlyWarning(pulseRate, PULSE_RATE_UPPER_LIMIT, PULSE_RATE_LOWER_LIMIT);
+        checkEarlyWarning(pulse, PULSE_UPPERLIMIT, PULSE_LOWERLIMIT);
         return 1;
     }
 }
 
 int checkSpo2Value(float spo2) {
-    bool checkSpo2NotInRange = isParamsNotInRange(spo2, SPO2_LOWER_LIMIT, SPO2_UPPER_LIMIT);
-    if (checkSpo2NotInRange) {
-        displayMessage(spo2Critical);
+    bool checkSpo2Range = isParamsNotInRange(spo2, SPO2_LOWERLIMIT, SPO2_UPPERLIMIT);
+    if (checkSpo2Range) {
+        displayMessage("SPO2_CRITICAL");
         return 0;
     }
     else {
-        checkEarlyWarning(spo2, SPO2_UPPER_LIMIT, SPO2_LOWER_LIMIT);
+        checkEarlyWarning(spo2, SPO2_UPPERLIMIT, SPO2_LOWERLIMIT);
         return 1;
     }
 }
