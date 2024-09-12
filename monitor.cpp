@@ -4,7 +4,6 @@
 #include <chrono>
 #include <iostream>
 using std::cout, std::flush, std::this_thread::sleep_for, std::chrono::seconds;
-using namespace std;
 
 void displayMessage(std::string message) {
     cout << message << "\n";
@@ -39,8 +38,7 @@ int checkTemperatureValue(float temp) {
     if (checkTempRange) {
         displayMessage("TEMP_CRITICAL");
         return 0;
-    }
-    else {
+    }else {
         checkEarlyWarning(temp, TEMP_UPPERLIMIT, TEMP_LOWERLIMIT);
         return 1;
     }
@@ -51,8 +49,7 @@ int checkPulseRateValue(float pulse) {
     if (checkPulseRange) {
         displayMessage("PULSERATE_CRITICAL");
         return 0;
-    }
-    else {
+    }else {
         checkEarlyWarning(pulse, PULSE_UPPERLIMIT, PULSE_LOWERLIMIT);
         return 1;
     }
@@ -63,8 +60,7 @@ int checkSpo2Value(float spo2) {
     if (checkSpo2Range) {
         displayMessage("SPO2_CRITICAL");
         return 0;
-    }
-    else {
+    }else {
         checkEarlyWarning(spo2, SPO2_UPPERLIMIT, SPO2_LOWERLIMIT);
         return 1;
     }
